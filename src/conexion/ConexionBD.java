@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     // Parámetros de conexión a PostgreSQL
-    private static final String URL = "jdbc:postgresql://localhost:5433/BODEGA_LAPERUANITA";
+    private static final String URL = "jdbc:postgresql://localhost:5432/BODEGA_LAPERUANITA";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "12345"; // <-- Coloca tu clave de pgAdmin
+    private static final String PASSWORD = "root"; // <-- Coloca tu clave de pgAdmin
 
     public static Connection getConexion() {
         Connection con = null;
