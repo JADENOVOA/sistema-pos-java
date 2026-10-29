@@ -84,8 +84,17 @@ public class PnlNuevaVenta extends JPanel {
         // 2. COLUMNA DERECHA: Carrito en Curso y Caja de Cobro
         add(crearPanelCarritoDerecho(), BorderLayout.EAST);
 
-        // Cargar productos de PostgreSQL a la tabla
+        // Cargar productos de PostgreSQL al abrir el módulo por primera vez
         cargarProductosEnTabla();
+
+        // Actualizar el catálogo cada vez que el panel vuelva a mostrarse.
+        // Así se reflejan los productos recién registrados sin reiniciar el sistema.
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e) {
+                refrescarProductos();
+            }
+        });
     }
 
     // =========================================================================
@@ -472,6 +481,14 @@ public class PnlNuevaVenta extends JPanel {
                 "+ AGREGAR"
             });
         }
+    }
+
+    /**
+     * Vuelve a consultar los productos en PostgreSQL y actualiza el catálogo.
+     * Este método también puede llamarse desde el menú principal al abrir Nueva Venta.
+     */
+    public void refrescarProductos() {
+        cargarProductosEnTabla();
     }
 
     private void agregarProductoSeleccionado() {
